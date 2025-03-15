@@ -83,15 +83,30 @@ def view(game):
     def draw_controls():
         pygame.draw.rect(screen, BUTTON_COLOR, freq_dec_rect)
         game.blit_centred(MINUS, freq_dec_rect.center)
-        pygame.Surface.blit(screen, freq_label, (freq_dec_rect.x, CTRLS_Y - 26), area=None, special_flags = 0)
+        screen.blit(freq_label, (freq_dec_rect.x, CTRLS_Y - 26))
         pygame.draw.rect(screen, BUTTON_COLOR, freq_inc_rect)
         game.blit_centred(PLUS, freq_inc_rect.center)
 
         pygame.draw.rect(screen, BUTTON_COLOR, circles_dec_rect)
         game.blit_centred(MINUS, circles_dec_rect.center)
-        pygame.Surface.blit(screen, circles_label, (circles_dec_rect.x, CTRLS_Y - 26), area=None, special_flags = 0)
+        screen.blit(circles_label, (circles_dec_rect.x, CTRLS_Y - 26))
         pygame.draw.rect(screen, BUTTON_COLOR, circles_inc_rect)
         game.blit_centred(PLUS, circles_inc_rect.center)
+
+        current_freq_text = font.lg.render(f"Freq: {speed:.3f}", True, TEXT_COLOR)
+        current_circle_text = font.lg.render(f"Circles: {num_circles}", True, TEXT_COLOR)
+
+        screen.blit(current_freq_text, (freq_inc_rect.right + 145, CTRLS_Y + 2))
+        screen.blit(current_circle_text, (circles_inc_rect.right + 145, CTRLS_Y + 2))
+        # Render instructions
+        instructions_text = (
+            "Click [+] or [-] to change Frequency (vertical wave speed) "
+            "and Circles (detail level)."
+        )
+        instructions_surface = font.md.render(instructions_text, True, TEXT_COLOR)
+
+        # Choose an on-screen position for instructions. For instance, near top center:
+        screen.blit(instructions_surface, (vw(5), vh(10)))
 
     def handle_controls():
         nonlocal speed, num_circles
