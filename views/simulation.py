@@ -96,17 +96,8 @@ def view(game):
         current_freq_text = font.lg.render(f"Freq: {speed:.3f}", True, TEXT_COLOR)
         current_circle_text = font.lg.render(f"Circles: {num_circles}", True, TEXT_COLOR)
 
-        screen.blit(current_freq_text, (freq_inc_rect.right + 145, CTRLS_Y + 2))
-        screen.blit(current_circle_text, (circles_inc_rect.right + 145, CTRLS_Y + 2))
-        # Render instructions
-        instructions_text = (
-            "Click [+] or [-] to change Frequency (vertical wave speed) "
-            "and Circles (detail level)."
-        )
-        instructions_surface = font.md.render(instructions_text, True, TEXT_COLOR)
-
-        # Choose an on-screen position for instructions. For instance, near top center:
-        screen.blit(instructions_surface, (vw(5), vh(10)))
+        screen.blit(current_freq_text, (freq_inc_rect.right - 100, CTRLS_Y + 30))
+        screen.blit(current_circle_text, (circles_inc_rect.right - 100, CTRLS_Y + 30))
 
     def handle_controls():
         nonlocal speed, num_circles
