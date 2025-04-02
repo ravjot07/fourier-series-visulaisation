@@ -123,12 +123,13 @@ def view(game):
             y += int(MAX_RADIUS * (4 / (n * pi) * sin(n * -step)))
 
             rad = int(sqrt((prev_x - x) ** 2 + (prev_y - y) ** 2))
+            safe_rad = max(rad, STROKE_WIDTH + 1)
 
             clr = CIRCLE_COLORS[i % len(CIRCLE_COLORS)]
 
             pygame.draw.line(screen, CIRCLE_COLOR, (prev_x, prev_y), (x, y), 1)
 
-            pygame.draw.circle(screen, CIRCLE_COLOR, (prev_x, prev_y), rad, STROKE_WIDTH + 1)
+            pygame.draw.circle(screen, CIRCLE_COLOR, (prev_x, prev_y), safe_rad, STROKE_WIDTH + 1)
             pygame.draw.circle(screen, CIRCLE_COLOR, (prev_x, prev_y), rad + 1, STROKE_WIDTH)
             pygame.draw.circle(screen, clr, (prev_x, prev_y), rad, STROKE_WIDTH)
 
